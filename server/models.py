@@ -28,7 +28,7 @@ class Restaurant(db.Model, SerializerMixin):
     pizzas = association_proxy("restaurant_pizzas", "pizza", creator=lambda pizza_obj:RestaurantPizza(pizza = pizza_obj))
 
     def __repr__(self):
-        return f"<Restaurant {self.name}>"
+        return f"<Restaurant {self.id}, {self.name}>"
 
 
 class Pizza(db.Model, SerializerMixin):
@@ -46,7 +46,7 @@ class Pizza(db.Model, SerializerMixin):
     restaurants = association_proxy("restaurant_pizzas", "restaurant", creator=lambda restaurant_obj:RestaurantPizza(restaurant = restaurant_obj))
 
     def __repr__(self):
-        return f"<Pizza {self.name}, {self.ingredients}>"
+        return f"<Pizza {self.id}, {self.name}, {self.ingredients}>"
 
 
 class RestaurantPizza(db.Model, SerializerMixin):
@@ -73,4 +73,4 @@ class RestaurantPizza(db.Model, SerializerMixin):
         return price
 
     def __repr__(self):
-        return f"<RestaurantPizza ${self.price}>"
+        return f"<RestaurantPizza {self.id}, ${self.price}>"
